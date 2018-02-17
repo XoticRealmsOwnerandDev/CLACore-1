@@ -21,7 +21,7 @@
  namespace CLACore;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\TextFormat as C;
+use pocketmine\utils\{Config, TextFormat as C};
 
 class Loader extends PluginBase{
 
@@ -34,10 +34,28 @@ class Loader extends PluginBase{
   \_____|______/_/    \_\_____\___/|_|  \___|";
 
     public function onEnable(){
-    	$this->getLogger()->info(C::GREEN."Loaded".C::AQUA.$this->prefix);
+    	$this->RegisterConfig();
+
+    	#logger
+    	$this->loggerservername = C::YELLOW."\nServer Name: ".C::AQUA.$this->getServer()->getNetwork()->getName();
+    	$this->loggerlanguage = C::YELLOW."\nLanguage: ".C::AQUA.$this->languagename;
+    	$this->getLogger()->info(C::GREEN."Loaded".C::AQUA.$this->prefix.$this->loggerservername.$this->loggerlanguage);
     }
 
     public function onDisable(){
-    	$this->getLogger()->info(C::RED."Disabled".C::AQUA.$this->prefix);
+    	$this->getLogger()->info(C::RED."Disabled".C::AQUA.$this->prefix.$this->loggerservername.$this->loggerlanguage);
+    }
+
+    public function RegisterConfig(){
+    	@mkdir($this->getDataFolder());
+
+    	$this->saveResource("config.yml");
+    	$this->cfg = new Config($this->getDataFolder()."config.yml", Config::YAML);
+
+    	#Language
+    	$this->language = $this->cfg->get("language");
+    	$this->saveResource("lang/$this->language.yml");
+    	$this->langcfg = new Config($this->getDataFolder()."lang/$this->language.yml", Config::YAML);
+    	$this->languagename = $this->langcfg->get("language.name");
     }
 }

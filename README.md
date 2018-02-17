@@ -8,6 +8,8 @@
 
 ## Features:
 
+- [x] Language System
+
  ## Need Help?
  
   Open an Issue [here](https://github.com/CLADevs/CLACore/issues/new).
