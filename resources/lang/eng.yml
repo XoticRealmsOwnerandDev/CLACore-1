@@ -1,3 +1,14 @@
 ---
 language.name: English
+
+#General
+no.permission: §cYou are not allow to do that
+player.not.found: §cThat player cannot be found
+
+#Feed & Heal
+player.fed: §aYou have been fed.
+sender.fed: §b{player} §ahas been fed. 
+
+player.healed: §aYou have been healed.
+sender.healed: §b{player} §ahas been healed. 
 ...

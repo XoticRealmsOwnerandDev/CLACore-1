@@ -18,10 +18,15 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
- namespace CLACore;
+declare(strict_types=1);
+
+namespace CLACore;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\{Config, TextFormat as C};
+
+#Managers
+use CLACore\Commands\CommandManager;
 
 class Loader extends PluginBase{
 
@@ -33,8 +38,18 @@ class Loader extends PluginBase{
  | |____| |____ / ____ \ |____ (_) | | |  __/
   \_____|______/_/    \_\_____\___/|_|  \___|";
 
+  private static $instance;
+
+  public static function getInstance(): Loader{
+    return self::$instance;
+  }
+
     public function onEnable(){
     	$this->RegisterConfig();
+        $this->RegisterManager();
+
+        #instance
+        self::$instance = $this;
 
     	#logger
     	$this->loggerservername = C::YELLOW."\nServer Name: ".C::AQUA.$this->getServer()->getNetwork()->getName();
@@ -57,5 +72,9 @@ class Loader extends PluginBase{
     	$this->saveResource("lang/$this->language.yml");
     	$this->langcfg = new Config($this->getDataFolder()."lang/$this->language.yml", Config::YAML);
     	$this->languagename = $this->langcfg->get("language.name");
+    }
+
+    public function RegisterManager(){
+        $this->CommandManager = new CommandManager($this);
     }
 }
