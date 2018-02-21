@@ -1,0 +1,2 @@
+The phars listed, here are required for CLACore to work!
+For example FormsAPI, it will require you to install it.
