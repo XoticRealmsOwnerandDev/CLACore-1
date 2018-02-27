@@ -4,7 +4,7 @@
  
 ## TODO
 
-* If you want us to add other features please click [here](https://github.com/CLADevs/CLACore/issues/new)!
+* If you want other features please click [here](https://github.com/CLADevs/CLACore/issues/new) and tell us what you want!
 
 ## Features:
 
@@ -14,6 +14,7 @@
 
 - [x] Heal
 - [x] Feed
+- [x] StaffChat
 
  ## Need Help?
  
