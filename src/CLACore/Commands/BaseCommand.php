@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
 declare(strict_types=1);
 
@@ -43,7 +43,7 @@ class BaseCommand extends Command implements PluginIdentifiableCommand{
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args){
-		if(!$this->getPlugin->isEnabled()){
+		if(!$this->plugin->isEnabled()){
 			return false;
 		}
 		if(!$this->testPermission($sender)){

@@ -36,7 +36,8 @@ class CommandManager{
 	public function init(){
 		$cmds = [
             new Feed($this->plugin),
-            new Heal($this->plugin)
+            new Heal($this->plugin),
+            new StaffChat($this->plugin)
         ];
 
         $this->plugin->getServer()->getCommandMap()->registerAll("CLACore", $cmds);

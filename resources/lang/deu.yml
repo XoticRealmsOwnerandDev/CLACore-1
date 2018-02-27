@@ -1,0 +1,18 @@
+---
+language.name: Deutsch
+
+#General
+no.permission: §cDu bist nicht berechtigt dies zu tun.
+player.not.found: §cDies Spieler wurde nicht gefunden.
+
+#Feed & Heal
+player.fed: §aDu wurdest gefüttert.
+sender.fed: §b{player} §awurde gefüttert.
+
+player.healed: §aDu wurdest geheilt.
+sender.healed: §b{player} §awurde geheilt.
+
+#StaffChat
+staffchat.enabled: §eStaffChat §aAktiviert.
+staffchat.disabled: §eStaffChat §cDeaktiviert.
+...

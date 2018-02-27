@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
 declare(strict_types=1);
 
@@ -25,6 +25,7 @@ namespace CLACore\Commands;
 use pocketmine\command\CommandSender;
 
 use CLACore\Loader;
+use pocketmine\Player;
 
 class Feed extends BaseCommand{
 
@@ -38,7 +39,7 @@ class Feed extends BaseCommand{
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args){
 		if(!$sender->hasPermission("clacore.command.feed")){
-			$nopermission = $this->getPlugin()->langcfg->get("no.permission");
+			$nopermission = $this->plugin->langcfg->get("no.permission");
 			$sender->sendMessage("$nopermission");
 			return true;
 		}
@@ -50,22 +51,22 @@ class Feed extends BaseCommand{
 
 		$player = $sender;
 		if(isset($args[0]) && !($player = $this->getPlugin()->getServer()->getPlayer($args[0]))){
-			$playernotfound = $this->getPlugin()->langcfg->get("player.not.found");
+			$playernotfound = $this->plugin->langcfg->get("player.not.found");
 			$sender->sendMessage("$playernotfound");
 			return true;
 		}
 
 		if($player->getName() !== $sender->getName() && !$sender->hasPermission("clacore.command.feed.other")){
-			$nopermission = $this->getPlugin()->langcfg->get("no.permission");
+			$nopermission = $this->plugin->langcfg->get("no.permission");
 			$sender->sendMessage("$nopermission");
 			return true;
 		}
 
 		#player fed
-		$playerfed = $this->getPlugin()->langcfg->get("player.fed");
+		$playerfed = $this->plugin->langcfg->get("player.fed");
 
 		#sender fed
-		$senderfed = $this->getPlugin()->langcfg->get("sender.fed");
+		$senderfed = $this->plugin->langcfg->get("sender.fed");
 		$senderfed = str_replace("{player}", $player->getName(), $senderfed);
 
 		$player->setFood(20);

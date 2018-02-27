@@ -26,6 +26,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\event\entity\EntityRegainHealthEvent;
 
 use CLACore\Loader;
+use pocketmine\Player;
 
 class Heal extends BaseCommand{
 
@@ -39,7 +40,7 @@ class Heal extends BaseCommand{
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args){
 		if(!$sender->hasPermission("clacore.command.heal")){
-			$nopermission = $this->getPlugin()->langcfg->get("no.permission");
+			$nopermission = $this->plugin->langcfg->get("no.permission");
 			$sender->sendMessage("$nopermission");
 			return true;
 		}
@@ -51,22 +52,22 @@ class Heal extends BaseCommand{
 
 		$player = $sender;
 		if(isset($args[0]) && !($player = $this->getPlugin()->getServer()->getPlayer($args[0]))){
-			$playernotfound = $this->getPlugin()->langcfg->get("player.not.found");
+			$playernotfound = $this->plugin->langcfg->get("player.not.found");
 			$sender->sendMessage("$playernotfound");
 			return true;
 		}
 
 		if($player->getName() !== $sender->getName() && !$sender->hasPermission("clacore.command.heal.other")){
-			$nopermission = $this->getPlugin()->langcfg->get("no.permission");
+			$nopermission = $this->plugin->langcfg->get("no.permission");
 			$sender->sendMessage("$nopermission");
 			return true;
 		}
 
 		#player healed
-		$playerhealed = $this->getPlugin()->langcfg->get("player.healed");
+		$playerhealed = $this->plugin->langcfg->get("player.healed");
 
 		#sender healed
-		$senderhealed = $this->getPlugin()->langcfg->get("sender.healed");
+		$senderhealed = $this->plugin->langcfg->get("sender.healed");
 		$senderhealed = str_replace("{player}", $player->getName(), $senderhealed);
 
 		$player->heal(new EntityRegainHealthEvent($player, $player->getMaxHealth() - $player->getHealth(), EntityRegainHealthEvent::CAUSE_CUSTOM));
