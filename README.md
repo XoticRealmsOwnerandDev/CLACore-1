@@ -19,9 +19,6 @@
  ## Need Help?
  
   Open an Issue [here](https://github.com/CLADevs/CLACore/issues/new).
-  
- # Credits:
- * EssentialsPE
 
  # Developer:
  
