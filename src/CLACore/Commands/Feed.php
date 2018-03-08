@@ -27,53 +27,54 @@ use pocketmine\command\CommandSender;
 use CLACore\Loader;
 use pocketmine\Player;
 
-class Feed extends BaseCommand{
+class Feed extends BaseCommand {
 
-	private $plugin;
+    private $plugin;
 
-	public function __construct(Loader $plugin){
-		$this->plugin = $plugin;
-		parent::__construct($plugin, "feed", "Feed someone else or yourself", "/feed <player>", ["feed"]);
-		$this->setPermission("clacore.command.feed");
-	}
+    public function __construct(Loader $plugin) {
+        $this->plugin = $plugin;
+        parent::__construct($plugin, "feed", "Feed someone or yourself", "/feed <player>", ["feed"]);
+    }
 
-	public function execute(CommandSender $sender, string $commandLabel, array $args){
-		if(!$sender->hasPermission("clacore.command.feed")){
-			$nopermission = $this->plugin->langcfg->get("no.permission");
-			$sender->sendMessage("$nopermission");
-			return true;
-		}
+    public function execute(CommandSender $sender, string $commandLabel, array $args) {
+        if (!$sender->hasPermission("clacore.command.feed")) {
+            $nopermission = $this->plugin->langcfg->get("no.permission");
+            $sender->sendMessage("$nopermission");
+            return true;
+        }
 
-		if((!isset($args[0]) && !$sender instanceof Player) || count($args) > 1){
-			$sender->sendMessage("Usage: /feed <player>");
-			return true;
-		}
+        if ((!isset($args[0]) && !$sender instanceof Player) || count($args) > 1) {
+            $sender->sendMessage("Usage: /feed <player>");
+            return true;
+        }
 
-		$player = $sender;
-		if(isset($args[0]) && !($player = $this->getPlugin()->getServer()->getPlayer($args[0]))){
-			$playernotfound = $this->plugin->langcfg->get("player.not.found");
-			$sender->sendMessage("$playernotfound");
-			return true;
-		}
+        $player = $sender;
+        if (isset($args[0]) && !($player = $this->getPlugin()->getServer()->getPlayer($args[0]))) {
+            $playernotfound = $this->plugin->langcfg->get("player.not.found");
+            $sender->sendMessage("$playernotfound");
+            return true;
+        }
 
-		if($player->getName() !== $sender->getName() && !$sender->hasPermission("clacore.command.feed.other")){
-			$nopermission = $this->plugin->langcfg->get("no.permission");
-			$sender->sendMessage("$nopermission");
-			return true;
-		}
+        if ($player->getName() !== $sender->getName() && !$sender->hasPermission("clacore.command.feed.other")) {
+            $nopermission = $this->plugin->langcfg->get("no.permission");
+            $sender->sendMessage("$nopermission");
+            return true;
+        }
 
-		#player fed
-		$playerfed = $this->plugin->langcfg->get("player.fed");
+        #player fed
+        $playerfed = $this->plugin->langcfg->get("player.fed");
 
-		#sender fed
-		$senderfed = $this->plugin->langcfg->get("sender.fed");
-		$senderfed = str_replace("{player}", $player->getName(), $senderfed);
+        #sender fed
+        $senderfed = $this->plugin->langcfg->get("sender.fed");
+        $senderfed = str_replace("{player}", $player->getName(), $senderfed);
 
-		$player->setFood(20);
-		$player->sendMessage("$playerfed");
-		if($player !== $sender){
-			$sender->sendMessage("$senderfed");
-		}
-		return true;
-	}
+        $player->setFood(20);
+        $player->sendMessage("$playerfed");
+
+        if ($player !== $sender) {
+            $sender->sendMessage("$senderfed");
+        }
+
+        return true;
+    }
 }

@@ -23,6 +23,7 @@ declare(strict_types=1);
 namespace CLACore\Commands;
 
 use CLACore\Loader;
+
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 
@@ -43,8 +44,8 @@ class StaffChat extends BaseCommand {
                     $enabled = $this->plugin->langcfg->get("staffchat.enabled");
                     $sender->sendMessage("$enabled");
                 }else{
-                    $disabled = $this->plugin->langcfg->get("staffchat.disabled");
                     unset($this->plugin->staffchat[array_search($sender->getName(), $this->plugin->staffchat)]);
+                    $disabled = $this->plugin->langcfg->get("staffchat.disabled");
                     $sender->sendMessage("$disabled");
                 }
             }

@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
 declare(strict_types=1);
 
@@ -24,22 +24,21 @@ namespace CLACore\Commands;
 
 use CLACore\Loader;
 
-class CommandManager{
+class CommandManager {
 
-	private $plugin;
+    private $plugin;
 
-	public function __construct(Loader $plugin){
-		$this->plugin = $plugin;
-		$this->init();
-	}
+    public function __construct(Loader $plugin) {
+        $this->plugin = $plugin;
+        $this->init();
+    }
 
-	public function init(){
-		$cmds = [
+    public function init() : void{
+        $cmds = [
             new Feed($this->plugin),
             new Heal($this->plugin),
             new StaffChat($this->plugin)
         ];
-
         $this->plugin->getServer()->getCommandMap()->registerAll("CLACore", $cmds);
-	}
+    }
 }

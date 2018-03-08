@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
 declare(strict_types=1);
 
@@ -28,53 +28,54 @@ use pocketmine\event\entity\EntityRegainHealthEvent;
 use CLACore\Loader;
 use pocketmine\Player;
 
-class Heal extends BaseCommand{
+class Heal extends BaseCommand {
 
-	private $plugin;
+    private $plugin;
 
-	public function __construct(Loader $plugin){
-		$this->plugin = $plugin;
-		parent::__construct($plugin, "heal", "Heal someone else or yourself", "/heal <player>", ["heal"]);
-		$this->setPermission("clacore.command.heal");
-	}
+    public function __construct(Loader $plugin) {
+        $this->plugin = $plugin;
+        parent::__construct($plugin, "heal", "Heal someone or yourself", "/heal <player>", ["heal"]);
+    }
 
-	public function execute(CommandSender $sender, string $commandLabel, array $args){
-		if(!$sender->hasPermission("clacore.command.heal")){
-			$nopermission = $this->plugin->langcfg->get("no.permission");
-			$sender->sendMessage("$nopermission");
-			return true;
-		}
+    public function execute(CommandSender $sender, string $commandLabel, array $args) {
+        if (!$sender->hasPermission("clacore.command.heal")) {
+            $nopermission = $this->plugin->langcfg->get("no.permission");
+            $sender->sendMessage("$nopermission");
+            return true;
+        }
 
-		if((!isset($args[0]) && !$sender instanceof Player) || count($args) > 1){
-			$sender->sendMessage("Usage: /heal <player>");
-			return true;
-		}
+        if ((!isset($args[0]) && !$sender instanceof Player) || count($args) > 1) {
+            $sender->sendMessage("Usage: /heal <player>");
+            return true;
+        }
 
-		$player = $sender;
-		if(isset($args[0]) && !($player = $this->getPlugin()->getServer()->getPlayer($args[0]))){
-			$playernotfound = $this->plugin->langcfg->get("player.not.found");
-			$sender->sendMessage("$playernotfound");
-			return true;
-		}
+        $player = $sender;
+        if (isset($args[0]) && !($player = $this->getPlugin()->getServer()->getPlayer($args[0]))) {
+            $playernotfound = $this->plugin->langcfg->get("player.not.found");
+            $sender->sendMessage("$playernotfound");
+            return true;
+        }
 
-		if($player->getName() !== $sender->getName() && !$sender->hasPermission("clacore.command.heal.other")){
-			$nopermission = $this->plugin->langcfg->get("no.permission");
-			$sender->sendMessage("$nopermission");
-			return true;
-		}
+        if ($player->getName() !== $sender->getName() && !$sender->hasPermission("clacore.command.heal.other")) {
+            $nopermission = $this->plugin->langcfg->get("no.permission");
+            $sender->sendMessage("$nopermission");
+            return true;
+        }
 
-		#player healed
-		$playerhealed = $this->plugin->langcfg->get("player.healed");
+        #player healed
+        $playerhealed = $this->plugin->langcfg->get("player.healed");
 
-		#sender healed
-		$senderhealed = $this->plugin->langcfg->get("sender.healed");
-		$senderhealed = str_replace("{player}", $player->getName(), $senderhealed);
+        #sender healed
+        $senderhealed = $this->plugin->langcfg->get("sender.healed");
+        $senderhealed = str_replace("{player}", $player->getName(), $senderhealed);
 
-		$player->heal(new EntityRegainHealthEvent($player, $player->getMaxHealth() - $player->getHealth(), EntityRegainHealthEvent::CAUSE_CUSTOM));
-		$player->sendMessage("$playerhealed");
-		if($player !== $sender){
-			$sender->sendMessage("$senderhealed");
-		}
-		return true;
-	}
+        $player->heal(new EntityRegainHealthEvent($player, $player->getMaxHealth() - $player->getHealth(), EntityRegainHealthEvent::CAUSE_CUSTOM));
+        $player->sendMessage("$playerhealed");
+
+        if ($player !== $sender) {
+            $sender->sendMessage("$senderhealed");
+        }
+
+        return true;
+    }
 }

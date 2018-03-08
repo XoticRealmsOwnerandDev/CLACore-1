@@ -22,37 +22,40 @@ declare(strict_types=1);
 
 namespace CLACore\Commands;
 
-use pocketmine\command\{Command, CommandSender, PluginIdentifiableCommand};
-use pocketmine\plugin\Plugin;
-
 use CLACore\Loader;
 
-class BaseCommand extends Command implements PluginIdentifiableCommand{
+use pocketmine\command\{Command, CommandSender, PluginIdentifiableCommand};
+use pocketmine\command\utils\InvalidCommandSyntaxException;
+use pocketmine\plugin\Plugin;
 
-	private $plugin;
-	private $executor;
+class BaseCommand extends Command implements PluginIdentifiableCommand {
 
-	public function __construct(Loader $plugin, $name, $description, $usageMessage, $aliases){
-		parent::__construct($name, $description, $usageMessage, $aliases);
-		$this->plugin = $plugin;
-		$this->executor = $plugin;
-	}
+    private $plugin;
 
-	public function getPlugin(): Plugin{
-		return $this->plugin;
-	}
+    public function __construct(Loader $plugin, $name, $description, $usageMessage, $aliases) {
+        $this->plugin = $plugin;
+        parent::__construct($name, $description, $usageMessage, $aliases);
+    }
 
-	public function execute(CommandSender $sender, string $commandLabel, array $args){
-		if(!$this->plugin->isEnabled()){
-			return false;
-		}
-		if(!$this->testPermission($sender)){
-			return false;
-		}
-		$success = $this->executor->onCommand($sender, $this, $commandLabel, $args);
-		if(!$success and $this->usageMessage !== ""){
-			throw new InvalidCommandSyntaxException();
-		}
-		return $success;
-	}
+    public function getPlugin() : Plugin {
+        return $this->plugin;
+    }
+
+    public function execute(CommandSender $sender, string $commandLabel, array $args) {
+        if (!$this->plugin->isEnabled()) {
+            return false;
+        }
+
+        if (!$this->testPermission($sender)) {
+            return false;
+        }
+
+        $success = $this->plugin->onCommand($sender, $this, $commandLabel, $args);
+
+        if (!$success and $this->usageMessage !== "") {
+            throw new InvalidCommandSyntaxException();
+        }
+
+        return $success;
+    }
 }
