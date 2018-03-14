@@ -1,5 +1,4 @@
 <?php
-
 /*
  * CLACore, a public core with many features for PocketMine-MP
  * Copyright (C) 2017-2018 CLADevs
@@ -17,45 +16,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
 declare(strict_types=1);
 
 namespace CLACore\Commands;
 
 use CLACore\Loader;
-
-use pocketmine\command\{Command, CommandSender, PluginIdentifiableCommand};
+use pocketmine\command\{
+    Command, CommandSender, PluginIdentifiableCommand
+};
 use pocketmine\command\utils\InvalidCommandSyntaxException;
 use pocketmine\plugin\Plugin;
 
-class BaseCommand extends Command implements PluginIdentifiableCommand {
+class BaseCommand extends Command implements PluginIdentifiableCommand{
 
     private $plugin;
 
-    public function __construct(Loader $plugin, $name, $description, $usageMessage, $aliases) {
+    public function __construct(Loader $plugin, $name, $description, $usageMessage, $aliases){
         $this->plugin = $plugin;
         parent::__construct($name, $description, $usageMessage, $aliases);
     }
 
-    public function getPlugin() : Plugin {
+    public function getPlugin() : Plugin{
         return $this->plugin;
     }
 
-    public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        if (!$this->plugin->isEnabled()) {
+    public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{
+        if(!$this->plugin->isEnabled()){
             return false;
         }
 
-        if (!$this->testPermission($sender)) {
+        if(!$this->testPermission($sender)){
             return false;
         }
 
         $success = $this->plugin->onCommand($sender, $this, $commandLabel, $args);
-
-        if (!$success and $this->usageMessage !== "") {
+        if(!$success and $this->usageMessage !== ""){
             throw new InvalidCommandSyntaxException();
         }
-
         return $success;
     }
 }

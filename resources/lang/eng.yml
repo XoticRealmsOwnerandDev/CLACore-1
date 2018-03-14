@@ -5,14 +5,14 @@ language.name: English
 no.permission: §cYou are not allowed to do that.
 player.not.found: §cThat player cannot be found.
 
-#Feed & Heal
+#FeedCommand & HealCommand
 player.fed: §aYou have been feed.
 sender.fed: §b{player} §ahas been feed.
 
 player.healed: §aYou have been healed.
 sender.healed: §b{player} §ahas been healed.
 
-#StaffChat
+#StaffChatCommand
 staffchat.enabled: §eStaffChat §aEnabled.
 staffchat.disabled: §eStaffChat §cDisabled.
 ...

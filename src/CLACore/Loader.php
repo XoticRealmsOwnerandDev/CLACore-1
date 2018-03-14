@@ -1,5 +1,4 @@
 <?php
-
 /*
  * CLACore, a public core with many features for PocketMine-MP
  * Copyright (C) 2017-2018 CLADevs
@@ -17,16 +16,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
 declare(strict_types=1);
 
 namespace CLACore;
 
 use CLACore\Events\PlayerChat;
 use CLACore\Commands\CommandManager;
-
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\{Config, TextFormat as C};
+use pocketmine\utils\{
+    Config, TextFormat as C
+};
 
 class Loader extends PluginBase{
 
@@ -54,44 +53,41 @@ class Loader extends PluginBase{
         return self::$instance;
     }
 
-    public function onEnable(){
-        $this->RegisterConfig();
-        $this->RegisterManager();
-        $this->RegisterEvents();
+    public function onEnable() : void{
+        $this->registerConfig();
+        $this->registerManager();
+        $this->registerEvents();
 
-        #instance
         self::$instance = $this;
 
-        #logger
-        $this->loggerservername = C::YELLOW . "\n"."MOTD: " . C::AQUA . $this->getServer()->getNetwork()->getName();
-        $this->loggerlanguage = C::YELLOW ."\n"."Language: " . C::AQUA . $this->languagename;
+        $this->loggerservername = C::YELLOW . "\n" . "MOTD: " . C::AQUA . $this->getServer()->getNetwork()->getName();
+        $this->loggerlanguage = C::YELLOW . "\n" . "Language: " . C::AQUA . $this->languagename;
         $this->getLogger()->info(C::GREEN . "Loaded" . C::AQUA . $this->prefix . $this->loggerservername . $this->loggerlanguage);
     }
 
-    private function RegisterConfig() : void{
+    private function registerConfig() : void{
         @mkdir($this->getDataFolder());
 
         $this->saveResource("config.yml");
         $this->cfg = new Config($this->getDataFolder() . "config.yml", Config::YAML);
 
-        #Language
         $this->language = $this->cfg->get("language");
         $this->saveResource("lang/{$this->language}.yml");
         $this->langcfg = new Config($this->getDataFolder() . "lang/{$this->language}.yml", Config::YAML);
         $this->languagename = $this->langcfg->get("language.name");
     }
 
-    public function RegisterManager() : CommandManager{
+    public function registerManager() : CommandManager{
         $cmdmngr = new CommandManager($this);
         return $cmdmngr;
     }
 
-    private function RegisterEvents() : void{
+    private function registerEvents() : void{
         $plmngr = $this->getServer()->getPluginManager();
         $plmngr->registerEvents(new PlayerChat($this), $this);
     }
 
-    public function onDisable(){
+    public function onDisable() : void{
         $this->getLogger()->info(C::RED . "Disabled" . C::AQUA . $this->prefix . $this->loggerservername . $this->loggerlanguage);
     }
 }

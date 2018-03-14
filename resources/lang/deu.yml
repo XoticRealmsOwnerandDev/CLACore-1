@@ -5,14 +5,14 @@ language.name: Deutsch
 no.permission: §cDu bist nicht berechtigt dies zu tun.
 player.not.found: §cDieser Spieler wurde nicht gefunden.
 
-#Feed & Heal
+#FeedCommand & HealCommand
 player.fed: §aDu wurdest gefüttert.
 sender.fed: §b{player} §awurde gefüttert.
 
 player.healed: §aDu wurdest geheilt.
 sender.healed: §b{player} §awurde geheilt.
 
-#StaffChat
+#StaffChatCommand
 staffchat.enabled: §eStaffChat §aAktiviert.
 staffchat.disabled: §eStaffChat §cDeaktiviert.
 ...

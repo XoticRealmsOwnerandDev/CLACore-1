@@ -5,10 +5,11 @@
 # | |    | |      / /\ \| |    / _ \| '__/ _ \
 # | |____| |____ / ____ \ |____ (_) | | |  __/
 #  \_____|______/_/    \_\_____\___/|_|  \___|
+
 # @Website: http://cladevs.ml
 # @Author: CLADevs Team
 
-#Languages:
+# Language Options:
 #- eng
 #- deu
 language: eng

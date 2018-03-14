@@ -1,5 +1,4 @@
 <?php
-
 /*
  * CLACore, a public core with many features for PocketMine-MP
  * Copyright (C) 2017-2018 CLADevs
@@ -17,21 +16,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
 declare(strict_types=1);
 
 namespace CLACore\Events;
 
 use CLACore\Loader;
-
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\utils\TextFormat as C;
 
-class PlayerChat extends EventListener {
+class PlayerChat extends EventListener{
 
     private $plugin;
 
-    public function __construct(Loader $plugin) {
+    public function __construct(Loader $plugin){
         $this->plugin = $plugin;
         parent::__construct($plugin);
     }
@@ -39,11 +36,11 @@ class PlayerChat extends EventListener {
     public function onChat(PlayerChatEvent $event){
         $player = $event->getPlayer();
         $msg = $event->getMessage();
-        if (in_array($player->getName(), $this->plugin->staffchat)){
+        if(in_array($player->getName(), $this->plugin->staffchat)){
             $event->setCancelled(true);
-            foreach ($this->plugin->getServer()->getOnlinePlayers() as $players){
-                if ($players->hasPermission("clacore.command.staffchat")){
-                    $players->sendMessage(C::RED."StaffChat".C::DARK_GRAY." | ".C::BLUE.$player->getName().C::GRAY." -> ".C::YELLOW.$msg);
+            foreach($this->plugin->getServer()->getOnlinePlayers() as $players){
+                if($players->hasPermission("clacore.command.staffchat")){
+                    $players->sendMessage(C::RED . "StaffChatCommand" . C::DARK_GRAY . " | " . C::BLUE . $player->getName() . C::GRAY . " -> " . C::YELLOW . $msg);
                 }
             }
         }

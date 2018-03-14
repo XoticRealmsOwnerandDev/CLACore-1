@@ -1,5 +1,4 @@
 <?php
-
 /*
  * CLACore, a public core with many features for PocketMine-MP
  * Copyright (C) 2017-2018 CLADevs
@@ -17,7 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
 declare(strict_types=1);
 
 namespace CLACore\Commands;
@@ -27,7 +25,7 @@ use CLACore\Loader;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 
-class StaffChat extends BaseCommand {
+class StaffChatCommand extends BaseCommand{
 
     private $plugin;
 
@@ -36,10 +34,10 @@ class StaffChat extends BaseCommand {
         parent::__construct($plugin, "staffchat", "Chat with Staff members", "/staffchat", ["sc"]);
     }
 
-    public function execute(CommandSender $sender, string $commandLabel, array $args){
-        if ($sender instanceof Player){
-            if ($sender->hasPermission("clacore.command.staffchat")){
-                if (!in_array($sender->getName(), $this->plugin->staffchat)){
+    public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{
+        if($sender instanceof Player){
+            if($sender->hasPermission("clacore.command.staffchat")){
+                if(!in_array($sender->getName(), $this->plugin->staffchat)){
                     $this->plugin->staffchat[] = $sender->getName();
                     $enabled = $this->plugin->langcfg->get("staffchat.enabled");
                     $sender->sendMessage("$enabled");
@@ -50,5 +48,6 @@ class StaffChat extends BaseCommand {
                 }
             }
         }
+        return true;
     }
 }

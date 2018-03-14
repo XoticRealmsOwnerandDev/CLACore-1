@@ -1,5 +1,4 @@
 <?php
-
 /*
  * CLACore, a public core with many features for PocketMine-MP
  * Copyright (C) 2017-2018 CLADevs
@@ -17,27 +16,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
 declare(strict_types=1);
 
 namespace CLACore\Commands;
 
 use CLACore\Loader;
 
-class CommandManager {
+class CommandManager{
 
     private $plugin;
 
-    public function __construct(Loader $plugin) {
+    public function __construct(Loader $plugin){
         $this->plugin = $plugin;
         $this->init();
     }
 
     public function init() : void{
         $cmds = [
-            new Feed($this->plugin),
-            new Heal($this->plugin),
-            new StaffChat($this->plugin)
+            new FeedCommand($this->plugin),
+            new HealCommand($this->plugin),
+            new StaffChatCommand($this->plugin)
         ];
         $this->plugin->getServer()->getCommandMap()->registerAll("CLACore", $cmds);
     }
