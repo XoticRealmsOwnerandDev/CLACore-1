@@ -17,3 +17,6 @@ permissions:
   default: op
  clacore.command.vanish.other:
   default: op
+ clacore.command.fly
+  default: op
+ clacore.command.other
