@@ -20,3 +20,4 @@ permissions:
  clacore.command.fly
   default: op
  clacore.command.other
+  default: op
