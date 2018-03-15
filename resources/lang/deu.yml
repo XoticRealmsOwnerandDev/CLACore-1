@@ -5,7 +5,7 @@ language.name: Deutsch
 no.permission: §cDu bist nicht berechtigt dies zu tun.
 player.not.found: §cDieser Spieler wurde nicht gefunden.
 
-#FeedCommand, HealCommand & VanishCommand
+#FeedCommand, HealCommand, VanishCommand & FlyCommand
 player.fed: §aDu wurdest gefüttert.
 sender.fed: §b{player} §awurde gefüttert.
 
@@ -14,6 +14,9 @@ sender.healed: §b{player} §awurde geheilt.
 
 player.vanished: §aU bent verdwenen.
 sender.vanished: §b{player} §ais verdwenen.
+
+flightmode.on: §aU nu vliegen.
+flightmode.off: §cJe niet meer vliegen.
 
 #StaffChatCommand
 staffchat.enabled: §eStaffChat §aAktiviert.

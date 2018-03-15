@@ -13,6 +13,7 @@
 - [x] Feed
 - [x] StaffChat
 - [x] Vanish
+- [x] Fly
 
  ## Need Help?
   Open an Issue [here](https://github.com/CLADevs/CLACore/issues/new).

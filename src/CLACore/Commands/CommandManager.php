@@ -36,7 +36,8 @@ class CommandManager{
             new FeedCommand($this->plugin),
             new HealCommand($this->plugin),
             new StaffChatCommand($this->plugin),
-            new VanishCommand($this->plugin)
+            new VanishCommand($this->plugin),
+            new FlyCommand($this->plugin)
         ];
         $this->plugin->getServer()->getCommandMap()->registerAll("CLACore", $cmds);
     }
