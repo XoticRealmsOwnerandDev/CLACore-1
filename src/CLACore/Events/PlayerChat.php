@@ -22,7 +22,7 @@ namespace CLACore\Events;
 
 use CLACore\Loader;
 use pocketmine\event\player\PlayerChatEvent;
-use pocketmine\utils\TextFormat as C;
+use pocketmine\utils\TextFormat;
 
 class PlayerChat extends EventListener{
 
@@ -33,14 +33,14 @@ class PlayerChat extends EventListener{
         parent::__construct($plugin);
     }
 
-    public function onChat(PlayerChatEvent $event){
+    public function onChat(PlayerChatEvent $event) : void{
         $player = $event->getPlayer();
         $msg = $event->getMessage();
         if(in_array($player->getName(), $this->plugin->staffchat)){
             $event->setCancelled(true);
             foreach($this->plugin->getServer()->getOnlinePlayers() as $players){
                 if($players->hasPermission("clacore.command.staffchat")){
-                    $players->sendMessage(C::RED . "StaffChatCommand" . C::DARK_GRAY . " | " . C::BLUE . $player->getName() . C::GRAY . " -> " . C::YELLOW . $msg);
+                    $players->sendMessage(TextFormat::RED . "StaffChatCommand" . TextFormat::DARK_GRAY . " | " . TextFormat::BLUE . $player->getName() . TextFormat::GRAY . " -> " . TextFormat::YELLOW . $msg);
                 }
             }
         }

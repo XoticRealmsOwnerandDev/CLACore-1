@@ -12,6 +12,7 @@
 - [x] Heal
 - [x] Feed
 - [x] StaffChat
+- [x] Vanish
 
  ## Need Help?
   Open an Issue [here](https://github.com/CLADevs/CLACore/issues/new).

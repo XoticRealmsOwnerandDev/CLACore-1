@@ -4,3 +4,16 @@ api: [3.0.0-ALPHA10, 3.0.0-ALPHA11]
 main: CLACore\Loader
 author: CLADevs Team
 website: https://github.com/CLADevs/CLACore
+permissions:
+ clacore.command.heal:
+  default: op
+ clacore.command.heal.other:
+  default: op
+ clacore.command.feed:
+  default: op
+ clacore.command.feed.other:
+  default: op
+ clacore.command.vanish:
+  default: op
+ clacore.command.vanish.other:
+  default: op

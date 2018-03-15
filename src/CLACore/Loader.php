@@ -24,7 +24,7 @@ use CLACore\Events\PlayerChat;
 use CLACore\Commands\CommandManager;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\{
-    Config, TextFormat as C
+    Config, TextFormat
 };
 
 class Loader extends PluginBase{
@@ -60,9 +60,9 @@ class Loader extends PluginBase{
 
         self::$instance = $this;
 
-        $this->loggerservername = C::YELLOW . "\n" . "MOTD: " . C::AQUA . $this->getServer()->getNetwork()->getName();
-        $this->loggerlanguage = C::YELLOW . "\n" . "Language: " . C::AQUA . $this->languagename;
-        $this->getLogger()->info(C::GREEN . "Loaded" . C::AQUA . $this->prefix . $this->loggerservername . $this->loggerlanguage);
+        $this->loggerservername = TextFormat::YELLOW . "\n" . "MOTD: " . TextFormat::AQUA . $this->getServer()->getNetwork()->getName();
+        $this->loggerlanguage = TextFormat::YELLOW . "\n" . "Language: " . TextFormat::AQUA . $this->languagename;
+        $this->getLogger()->info(TextFormat::GREEN . "Loaded" . TextFormat::AQUA . $this->prefix . $this->loggerservername . $this->loggerlanguage);
     }
 
     private function registerConfig() : void{
@@ -88,6 +88,6 @@ class Loader extends PluginBase{
     }
 
     public function onDisable() : void{
-        $this->getLogger()->info(C::RED . "Disabled" . C::AQUA . $this->prefix . $this->loggerservername . $this->loggerlanguage);
+        $this->getLogger()->info(TextFormat::RED . "Disabled" . TextFormat::AQUA . $this->prefix . $this->loggerservername . $this->loggerlanguage);
     }
 }
